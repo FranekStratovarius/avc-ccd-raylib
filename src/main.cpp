@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 	// print skeleton
 	skeleton->print();
 
-	ccd.apply(100000, 0.01f);
+	ccd.apply(10, 0.01f);
 
 	// print skeleton after ccd
 	skeleton->print();

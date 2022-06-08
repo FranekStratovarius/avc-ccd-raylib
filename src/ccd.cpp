@@ -107,8 +107,8 @@ bool CCD::apply (const int maxIter, const float eps)
 				if (i < m_numBones)
 				{
 					DrawLineEx(
-						Vector2{pivots[i].x*length+length*3, pivots[i].y*length+length*3},
-						Vector2{pivots[i+1].x*length+length*3, pivots[i+1].y*length+length*3},
+						Vector2{pivots[i].x*length+length*3, -pivots[i].y*length+length*3},
+						Vector2{pivots[i+1].x*length+length*3, -pivots[i+1].y*length+length*3},
 						5.0f,
 						Color{255, 0, 0, 255}
 					);
@@ -117,7 +117,7 @@ bool CCD::apply (const int maxIter, const float eps)
 			}
 			EndDrawing();
 			// sleep after drawing
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			/* output end */
 
 			// endeffector is last pivot

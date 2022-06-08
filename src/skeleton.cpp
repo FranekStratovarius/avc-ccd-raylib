@@ -49,7 +49,7 @@ SkeletonNode* SkeletonNode::getJoint(int& index, const int searchIndex)
 void SkeletonNode::print(int einruecktiefe)
 {
 	for(int i=0; i<einruecktiefe; i++) cout << " ";
-	cout << "angle = " << fmod((m_angle/M_PI*180.0f), 360) << endl;
+	cout << "angle = " << m_angle/M_PI*180.0f << endl;
 	if(m_child)
 		m_child->print(einruecktiefe+4);
 }
