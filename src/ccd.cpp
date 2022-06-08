@@ -69,7 +69,7 @@ bool CCD::apply (const int maxIter, const float eps)
 	for (int k = 1; k < maxIter; k++)
 	{
 		std::cout << "--- iteration " << k << " ---" << std::endl;
-		for(int i = m_numBones-1; i >= 0;i--)	// iterate through the pivots starting with the last
+		for (int i = m_numBones-1; i >= 0;i--)	// iterate through the pivots starting with the last
 		{
 			std::cout << "\t--- bone " << i << " ---" << std::endl;
 			// vector to the endeffector
@@ -81,7 +81,14 @@ bool CCD::apply (const int maxIter, const float eps)
 			// get old angle
 			float angle = bone->getAngle();
 			// calculate new angle and add it to the old
-			angle += acos((u * v) / (u.norm() * v.norm()));
+			float local_angle = acos((u * v) / (u.norm() * v.norm()));
+			// use last row of cross product for direction
+			if ((u.x * v.y - u.y * v.x) < 0)
+			{
+				local_angle = -local_angle;
+			}
+
+			angle += local_angle;
 		
 			// set angle of bone
 			bone->setAngle(angle);

@@ -28,6 +28,7 @@ int main(int argc, char** argv)
 	skeleton->print();
 
 	while (!WindowShouldClose());
+	CloseWindow();
 
 	return 0;
 }
