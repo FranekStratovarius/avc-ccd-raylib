@@ -112,6 +112,12 @@ bool CCD::apply (const int maxIter, const float eps)
 						5.0f,
 						Color{255, 0, 0, 255}
 					);
+					DrawCircle(
+						m_targetPos.x*length+length*3,
+						-m_targetPos.y*length+length*3,
+						5.0f,
+						GREEN
+					);
 					std::cout << "\t\tangle: " << m_skeleton.getJoint(i)->getAngle()/M_PI*180.0f << std::endl;
 				}
 			}
