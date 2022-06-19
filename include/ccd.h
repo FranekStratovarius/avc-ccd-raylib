@@ -5,8 +5,7 @@
 #include "skeleton.h"
 #include "vector2d.h"
 
-class CCD
-{
+class CCD {
 	private:
 		// Bone Chain
 		Skeleton m_skeleton;
@@ -25,16 +24,14 @@ class CCD
 };
 
 template <int boneCount>
-inline void CCD::setBoneChain(const float (&angle)[boneCount])
-{
+inline void CCD::setBoneChain(const float (&angle)[boneCount]) {
 	if(boneCount < 1) return;
 	m_numBones = boneCount;
 	SkeletonNode* node = new SkeletonNode();
 	node->setAngle(angle[0]/180.0f*M_PI);
 	m_skeleton.setRoot(node);
 	
-	for(int i=1; i<boneCount; i++)
-	{
+	for(int i=1; i<boneCount; i++) {
 		SkeletonNode* parent = node;
 		node = new SkeletonNode();
 		node->setAngle(angle[i]/180.0f*M_PI);

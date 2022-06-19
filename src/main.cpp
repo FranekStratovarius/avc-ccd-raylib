@@ -6,8 +6,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	CCD ccd = CCD();
 	// create angle array
 	float angles[] = {30.0f, 30.0f, 30.0f};
