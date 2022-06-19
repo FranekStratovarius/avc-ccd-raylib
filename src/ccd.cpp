@@ -1,8 +1,4 @@
-#include <math.h>
-#include <raylib.h>
-#include <chrono>
-#include <thread>
-
+#include "raylib_drawing.h"
 #include "ccd.h"
 
 CCD::CCD () {}
@@ -39,9 +35,7 @@ void CCD::setTargetPosition (float tx, float ty) {
 // run ccd
 bool CCD::apply (const int maxIter, const float eps) {
 	/* raylib */
-	InitWindow(600, 600, "ccd");
-
-	SetTargetFPS(60);
+	raylib_init();
 	/* raylib end */
 
 	// targetposition = m_targetPos
@@ -61,7 +55,7 @@ bool CCD::apply (const int maxIter, const float eps) {
 
 	for (int k = 1; k < maxIter; k++) {
 		std::cout << "--- iteration " << k << " ---" << std::endl;
-		for (int i = m_numBones-1; i >= 0;i--) {	// iterate through the pivots starting with the last 
+		for (int i = m_numBones-1; i >= 0; i--) {	// iterate through the pivots starting with the last 
 			std::cout << "\t--- bone " << i << " ---" << std::endl;
 			// vector to the endeffector
 			Vector2D u = endeffector - pivots[i];
@@ -85,34 +79,7 @@ bool CCD::apply (const int maxIter, const float eps) {
 			// update pivots with forward kinematic
 			getPivotPositions(m_numBones, pivots);
 
-			/* output */
-			BeginDrawing();
-
-			ClearBackground(RAYWHITE);
-			const int length = 100;
-			for (int i = 0; i < m_numBones+1; i++) {
-				std::cout << "\t\tpivot " << i << ": ";
-				pivots[i].print();
-				if (i < m_numBones) {
-					DrawLineEx(
-						Vector2{pivots[i].x*length+length*3, -pivots[i].y*length+length*3},
-						Vector2{pivots[i+1].x*length+length*3, -pivots[i+1].y*length+length*3},
-						5.0f,
-						Color{255, 0, 0, 255}
-					);
-					DrawCircle(
-						m_targetPos.x*length+length*3,
-						-m_targetPos.y*length+length*3,
-						5.0f,
-						GREEN
-					);
-					std::cout << "\t\tangle: " << m_skeleton.getJoint(i)->getAngle()/M_PI*180.0f << std::endl;
-				}
-			}
-			EndDrawing();
-			// sleep after drawing
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
-			/* output end */
+			raylib_draw_bonechain(m_numBones, pivots, m_targetPos, m_skeleton);
 
 			// endeffector is last pivot
 			endeffector = pivots[m_numBones];
