@@ -5,7 +5,7 @@
 #include "skeleton.h"
 #include "vector2d.h"
 
-void raylib_draw_bonechain(int m_numBones, Vector2D* pivots, Vector2D m_targetPos, Skeleton m_skeleton) {
+void raylib_draw_bonechain(int m_numBones, Vector2D* pivots, Vector2D& m_targetPos, Skeleton& m_skeleton) {
 	/* output */
 	BeginDrawing();
 
