@@ -1,8 +1,6 @@
 #include <math.h>
-#include <raylib.h>
-#include <chrono>
-#include <thread>
 
+#include "raylib_drawing.h"
 #include "ccd.h"
 
 CCD::CCD () {}
@@ -85,34 +83,7 @@ bool CCD::apply (const int maxIter, const float eps) {
 			// update pivots with forward kinematic
 			getPivotPositions(m_numBones, pivots);
 
-			/* output */
-			BeginDrawing();
-
-			ClearBackground(RAYWHITE);
-			const int length = 100;
-			for (int i = 0; i < m_numBones+1; i++) {
-				std::cout << "\t\tpivot " << i << ": ";
-				pivots[i].print();
-				if (i < m_numBones) {
-					DrawLineEx(
-						Vector2{pivots[i].x*length+length*3, -pivots[i].y*length+length*3},
-						Vector2{pivots[i+1].x*length+length*3, -pivots[i+1].y*length+length*3},
-						5.0f,
-						Color{255, 0, 0, 255}
-					);
-					DrawCircle(
-						m_targetPos.x*length+length*3,
-						-m_targetPos.y*length+length*3,
-						5.0f,
-						GREEN
-					);
-					std::cout << "\t\tangle: " << m_skeleton.getJoint(i)->getAngle()/M_PI*180.0f << std::endl;
-				}
-			}
-			EndDrawing();
-			// sleep after drawing
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
-			/* output end */
+			raylib_draw_bonechain(m_numBones, pivots, m_targetPos, m_skeleton);
 
 			// endeffector is last pivot
 			endeffector = pivots[m_numBones];
