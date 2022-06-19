@@ -8,7 +8,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-	bool ccd = true;
+	bool ccd = false;
 	if (ccd) {
 		CCD ccd = CCD();
 		// create angle array

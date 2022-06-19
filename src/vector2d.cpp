@@ -26,3 +26,17 @@ Vector2D operator-(Vector2D& o1, Vector2D& o2) {
 float operator*(Vector2D& o1, Vector2D& o2) {
 	return o1.x * o2.x + o1.y * o2.y;
 }
+
+Vector2D operator*(Vector2D& o, float scalar)	{
+	Vector2D res;
+	res.x = o.x * scalar;
+	res.y = o.y * scalar;
+	return res;
+}
+
+Vector2D operator/(Vector2D& o, float scalar)	{
+	Vector2D res;
+	res.x = o.x / scalar;
+	res.y = o.y / scalar;
+	return res;
+}

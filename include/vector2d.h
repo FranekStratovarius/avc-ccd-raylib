@@ -15,6 +15,8 @@ class Vector2D {
 	friend Vector2D operator+(Vector2D& o1, Vector2D& o2);
 	friend Vector2D operator-(Vector2D& o1, Vector2D& o2);
 	friend float operator*(Vector2D& o1, Vector2D& o2);
+	friend Vector2D operator*(Vector2D& o1, float scalar);
+	friend Vector2D operator/(Vector2D& o1, float scalar);
 };
 
 #endif // VECTOR2D_H

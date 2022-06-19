@@ -1,5 +1,3 @@
-#include <math.h>
-
 #include "raylib_drawing.h"
 #include "ccd.h"
 
@@ -37,9 +35,7 @@ void CCD::setTargetPosition (float tx, float ty) {
 // run ccd
 bool CCD::apply (const int maxIter, const float eps) {
 	/* raylib */
-	InitWindow(600, 600, "ccd");
-
-	SetTargetFPS(60);
+	raylib_init();
 	/* raylib end */
 
 	// targetposition = m_targetPos
@@ -59,7 +55,7 @@ bool CCD::apply (const int maxIter, const float eps) {
 
 	for (int k = 1; k < maxIter; k++) {
 		std::cout << "--- iteration " << k << " ---" << std::endl;
-		for (int i = m_numBones-1; i >= 0;i--) {	// iterate through the pivots starting with the last 
+		for (int i = m_numBones-1; i >= 0; i--) {	// iterate through the pivots starting with the last 
 			std::cout << "\t--- bone " << i << " ---" << std::endl;
 			// vector to the endeffector
 			Vector2D u = endeffector - pivots[i];

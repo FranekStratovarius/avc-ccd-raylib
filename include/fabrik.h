@@ -18,6 +18,7 @@ class FABRIK {
 		Skeleton* getSkeleton();
 		template <int boneCount>
 		inline void setBoneChain(const float (&angle)[boneCount], const float (&length)[boneCount]);
+		void getPivotPositions(int count, Vector2D* pivot);
 		void setTargetPosition(float tx, float ty);
 		bool apply(const int maxIter, const float eps);
 };
